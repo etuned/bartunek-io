@@ -1,0 +1,108 @@
+/* src/styles/index.css */
+@import 'tailwindcss';
+
+@theme {
+  --color-brand-gray: #4e4e4e;
+  --color-black: #171321;
+  --color-brand-dkblue: #0d314b;
+  --color-brand-plum: #4b0d49;
+  --color-brand-hotmag: #ff17e4;
+  --color-brand-magenta: #e310cb;
+  --color-brand-aqua: #86fbfb;
+  --color-white: #f7f8fa;
+  --font-size: 1.3rem;
+  --font-mono: "Oxygen mono", monospace;
+  --font-sans: Oxygen, sans-serif;
+  --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+
+  --color-primary: var(--color-brand-aqua);
+  --color-secondary: var(--color-brand-hotmag);
+  --breakpoint-md: 53.125rem;
+  --breakpoint-lg: 75rem;
+  --spacing-lg: 75rem;
+}
+
+@layer static {
+
+  /* Base UI settings for portals */
+  .root {
+    isolation: isolate;
+  }
+
+  /* Base UI: iOS 26 fix for overlay */
+  body {
+    position: relative;
+    background: var(--color-black);
+    color: var(--color-white);
+  }
+
+  .gradient {
+    border-top-width: 0;
+    outline: none;
+    color: inherit;
+    background: linear-gradient(90deg, var(--color-secondary) 0%, var(--color-primary) 100%);
+    height: 2px;
+  }
+
+  nav {
+    font-family: var(--font-mono);
+    font-size: 90%;
+    padding: 1rem;
+  }
+
+  nav li:first-child {
+    flex-basis: 100%;
+    text-align: center;
+  }
+
+  nav a {
+    font-family: var(--font-sans);
+  }
+
+  nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  nav #logo {
+    width: 100%;
+  }
+
+  nav a {
+    color: var(--color-white);
+    text-decoration: none;
+    display: block;
+  }
+
+  nav a:hover {
+    color: var(--color-brand-magenta);
+  }
+
+  nav a:hover .sms {
+    color: var(--color-brand-magenta);
+  }
+
+  @media (min-width: 850px) {
+    nav {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    nav li:first-child {
+      flex-basis: auto;
+      text-align: left;
+      margin-right: auto;
+    }
+
+    nav #logo {
+      max-height: 85px;
+    }
+  }
+
+}
