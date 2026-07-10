@@ -4,7 +4,7 @@ import { Image } from "./image";
 import { AnchorExternalLink } from "./ui/anchor-link";
 
 
-export function ProjectCards({projects}: { projects?: ProjectsType }) {
+export function ProjectCards({projects}: { projects?: ProjectsType | null }) {
 	return (
 		<div className="w-full my-20 p-6 flex flex-col justify-center items-center">
 						{projects?.map(
@@ -104,7 +104,7 @@ export function ProjectCards({projects}: { projects?: ProjectsType }) {
 											preview={image?.lqip}
 											mode="cover"
 											className="rounded-lg aspect-video w-full object-cover"
-											sizes="(min-width: 400px) 390px, calc((100vw - 40px - 30px) / 3)"
+											sizes="(max-width: 400px) 600px, calc((100vw - 40px - 30px) / 3)"
 										/>
 									</div>
 								</div>

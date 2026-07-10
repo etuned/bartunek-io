@@ -1,42 +1,31 @@
 // src/routes/index.tsx
-
-import { IconClick } from '@tabler/icons-react';
-import { createFileRoute, Link } from '@tanstack/react-router';
-import { FormatDatetime } from '#/components/date-formater';
+import { createFileRoute } from '@tanstack/react-router';
 import { Image } from '#/components/image';
+import { PostCards } from '#/components/post-cards';
 import { ProjectCards } from '#/components/project-cards';
 import { AnchorExternalLink } from '#/components/ui/anchor-link';
-import { Badge } from '#/components/ui/badge';
-import {
-	Card,
-	CardAction,
-	CardContent,
-	CardDescription,
-	CardFooter,
-	CardHeader,
-	CardTitle,
-} from '#/components/ui/card';
+
 import { fetchHomeInfo } from '../../utils/home-info';
 
 export const Route = createFileRoute('/')({
 	head: () => ({
-    meta: [
-      {
-        title: 'Edwin Bartunek - A Senior Software Engineer',
-		
-      },
-	  {
-		name: 'description',
-		content: 'A software engineer building for the web and writing about it.'
-	  }
-    ],
-    links: [
-      {
-        rel: "canonical",
-        href: "https://www.bartunek.io",
-      },
-    ],
-  }),
+		meta: [
+			{
+				title: 'Edwin Bartunek - A Senior Software Engineer',
+			},
+			{
+				name: 'description',
+				content:
+					'A software engineer building for the web and writing about it.',
+			},
+		],
+		links: [
+			{
+				rel: 'canonical',
+				href: 'https://www.bartunek.io',
+			},
+		],
+	}),
 	loader: async () => await fetchHomeInfo(),
 	component: Home,
 });
@@ -84,54 +73,7 @@ function Home() {
 				<div className="p-4 max-w-lg mx-auto">
 					<h3 className="text-3xl font-black">My Recent Blog Posts</h3>
 					<div className="max-w-max my-20 mx-auto">
-						<div className="p-4 grid gap-6 grid-cols-1 content-center place-content-center md:grid-cols-2">
-							{info?.posts?.map(
-								({ id, slug, date, category, title, short, image }) => (
-									<Card
-										size="default"
-										key={id}
-										className="relative mx-auto w-full max-w-lg pt-0"
-									>
-										<div className="absolute inset-0 z-30 aspect-video bg-black/5" />
-										<Image
-											loading="lazy"
-											id={image?.id}
-											alt={image?.alt}
-											preview={image?.lqip}
-											height={216}
-											width={384}
-											className="relative z-20 aspect-video w-full object-cover"
-											sizes="(max-width: 860px) 400px"
-										/>
-										<CardHeader>
-											<CardAction>
-												<Badge>{category.name}</Badge>
-											</CardAction>
-											<CardTitle>{title}</CardTitle>
-											<CardDescription>
-												<FormatDatetime
-													dateObject={{
-														datetimeString: date,
-														timezone: 'Asia/Tokyo',
-													}}
-												/>
-											</CardDescription>
-										</CardHeader>
-										<CardContent className="w-full h-full">{short}</CardContent>
-										<CardFooter className="justify-end">
-											<Link
-												className="inline-flex gap-2"
-												to="/blog/$slug"
-												params={{ slug }}
-											>
-												<span>Read the full post</span>
-												<IconClick />
-											</Link>
-										</CardFooter>
-									</Card>
-								),
-							)}
-						</div>
+						<PostCards posts={info?.posts} />
 					</div>
 				</div>
 			</section>
