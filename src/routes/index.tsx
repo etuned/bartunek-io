@@ -19,6 +19,24 @@ import {
 import { fetchHomeInfo } from '../../utils/home-info';
 
 export const Route = createFileRoute('/')({
+	head: () => ({
+    meta: [
+      {
+        title: 'Edwin Bartunek - A Senior Software Engineer',
+		
+      },
+	  {
+		name: 'description',
+		content: 'A software engineer building for the web and writing about it.'
+	  }
+    ],
+    links: [
+      {
+        rel: "canonical",
+        href: "https://www.bartunek.io",
+      },
+    ],
+  }),
 	loader: async () => await fetchHomeInfo(),
 	component: Home,
 });
@@ -51,14 +69,12 @@ function Home() {
 						</p>
 					</div>
 					<Image
-						className="rounded-xl"
+						className="rounded-xl h-[350px] w-[350px]"
 						id={info?.author?.image?.id ?? ''}
 						alt={info?.author?.image?.alt}
 						preview={info?.author?.image?.lqip}
-						mode="cover"
 						height={350}
 						width={350}
-						sizes="(min-width: 1280px) 390px, calc((100vw - 40px - 30px) / 3)"
 					/>
 				</div>
 			</section>
@@ -82,11 +98,10 @@ function Home() {
 											id={image?.id}
 											alt={image?.alt}
 											preview={image?.lqip}
-											mode="cover"
 											height={216}
 											width={384}
 											className="relative z-20 aspect-video w-full object-cover"
-											sizes="(min-width: 1240px) 390px, calc((100vw - 40px - 30px) / 3)"
+											sizes="(max-width: 860px) 400px"
 										/>
 										<CardHeader>
 											<CardAction>
