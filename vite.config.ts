@@ -4,7 +4,6 @@ import { devtools } from '@tanstack/devtools-vite';
 import { tanstackStart } from '@tanstack/react-start/plugin/vite';
 import viteReact from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
-import Sitemap from 'vite-plugin-sitemap';
 import svgr from 'vite-plugin-svgr';
 
 const config = defineConfig({
@@ -14,9 +13,17 @@ const config = defineConfig({
 		svgr(),
 		cloudflare({ viteEnvironment: { name: 'ssr' } }),
 		tailwindcss(),
-		tanstackStart(),
+		tanstackStart({
+      prerender: {
+        enabled: true,
+        crawlLinks: true, // Discovers all linkable pages
+      },
+      sitemap: {
+        enabled: true,
+        host: 'https://bartunek.io',
+      },
+    }),
 		viteReact(),
-		Sitemap(),
 	],
 });
 
