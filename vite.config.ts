@@ -15,13 +15,8 @@ const config = defineConfig({
 		tailwindcss(),
 		tanstackStart({
       prerender: {
-        enabled: true,
-        crawlLinks: true, // Discovers all linkable pages
-      },
-      sitemap: {
-        enabled: true,
-        host: 'https://bartunek.io',
-      },
+        enabled: true
+      }
     }),
 		viteReact(),
 	],
