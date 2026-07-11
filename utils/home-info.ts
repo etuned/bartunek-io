@@ -22,6 +22,7 @@ export type HomeInfoType = {
   posts: {
     id: string
     title: string
+    updatedAt: string
     date: string
     slug: string
     category: {

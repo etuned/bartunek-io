@@ -15,7 +15,7 @@ import {
 } from './ui/card';
 import { Skeleton } from './ui/skeleton';
 
-export function PostCards({ posts }: { posts?: Array<PostsListType> | null }) {
+export function PostCards({ posts }: { posts?: PostsListType | null }) {
 	return (
 		<div className="py-6 grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-flow-col lg:place-items-center justify-center">
 			{posts?.map(({ id, slug, date, category, title, short, image }) => (

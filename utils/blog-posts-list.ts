@@ -20,7 +20,7 @@ export type PostsListType = {
     alt: string
   }
   short: string
-}
+}[]
 
 export const postsListQuery = groq`*[_type == "post"] 
     {
@@ -43,7 +43,7 @@ export const fetchPostsList = createServerFn({ method: 'GET' })
   .handler(async () => {
     console.info(`Fetching blog post list...`)
     try {
-      const post = await client.fetch<Array<PostsListType>>(postsListQuery).then((res) => res)
+      const post = await client.fetch<PostsListType>(postsListQuery).then((res) => res)
       console.log("fetched", "fetchPostsList on server")
       return post
     } catch (err) {
