@@ -1,5 +1,5 @@
 import { IconClick } from '@tabler/icons-react';
-import { Link } from '@tanstack/react-router';
+import { ClientOnly, Link } from '@tanstack/react-router';
 import type { PostsListType } from '../../utils/blog-posts-list';
 import { FormatDatetime } from './date-formater';
 import { Image } from './image';
@@ -13,6 +13,7 @@ import {
 	CardHeader,
 	CardTitle,
 } from './ui/card';
+import { Skeleton } from './ui/skeleton';
 
 export function PostCards({ posts }: { posts?: Array<PostsListType> | null }) {
 	return (
@@ -41,12 +42,15 @@ export function PostCards({ posts }: { posts?: Array<PostsListType> | null }) {
 						</CardAction>
 						<CardTitle>{title}</CardTitle>
 						<CardDescription>
-							<FormatDatetime
-								dateObject={{
-									datetimeString: date,
-									formatter: "MM/dd/yy hh:mm aaa",
-								}}
-							/>
+							<ClientOnly
+								fallback={
+								<Skeleton className="my-0.5 h-4 w-42" />
+									}
+							>
+								<FormatDatetime
+									dateObject={{ datetimeString: date }}
+								/>
+							</ClientOnly>
 						</CardDescription>
 					</CardHeader>
 					<CardContent className="w-full h-full">{short}</CardContent>
