@@ -10,14 +10,14 @@ import {
 	EmptyTitle,
 } from './ui/empty';
 
-export function NotFound({ children }: { children?: ReactNode }) {
+export function NotFound({ title = "Oops, Not Found", children }: { title?: string, children?: ReactNode }) {
 	return (
 		<>
 			<hr className="gradient" />
 			<Empty className="bg-brand-dkblue">
 				<EmptyHeader>
 					<EmptyTitle className="text-2xl font-bold">
-						Oops. Not Found
+						{title}
 					</EmptyTitle>
 					<EmptyMedia>
 						<img
@@ -31,7 +31,7 @@ export function NotFound({ children }: { children?: ReactNode }) {
 					<EmptyDescription>
 						{children || (
 							<p>
-								The page you are looking for does not exist. We could back one
+								The page you are looking for does not exist. We could go back one
 								page or just start over.
 							</p>
 						)}

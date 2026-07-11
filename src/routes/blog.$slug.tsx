@@ -1,5 +1,6 @@
 import { PortableText } from '@portabletext/react';
 import { ClientOnly, createFileRoute, Link } from '@tanstack/react-router';
+import { NotFound } from '#/components/ not-found';
 import { FormatDatetime } from '#/components/date-formater';
 import { Image } from '#/components/image';
 import { Badge } from '#/components/ui/badge';
@@ -7,24 +8,31 @@ import { Skeleton } from '#/components/ui/skeleton';
 import { fetchPost } from '../../utils/blog-post';
 
 export const Route = createFileRoute('/blog/$slug')({
+	notFoundComponent: () => (
+	<NotFound title="Oops, No Post Found">
+		<p>Looks like I didn't write a post at that url. We could go back one page or just start over.</p>
+	</NotFound>
+		),
 	loader: async ({ params: { slug } }) => {
 		const post = await fetchPost({ data: slug });
 		return post;
 	},
 	head: ({ loaderData }) => ({
 		meta: [
-			{ title: `${loaderData?.title ?? 'Blog Post'}  | Edwin Bartunek` },
+			{ title: `${loaderData?.title ?? 'No Blog Post Found'}  | Edwin Bartunek` },
+			loaderData?.short ?
 			{
 				name: 'description',
-				content:
-				`${loaderData?.short ?? 'A short blog post'}`,
-			},
+				content: `${loaderData?.short}`,
+			}: {},
 		],
+		
 		links: [
+			loaderData?.slug ?
 			{
 				rel: 'canonical',
-				href: `https://www.bartunek.io/blog/${loaderData?.slug ?? 'a-blog-slug'}`,
-			},
+				href: `https://www.bartunek.io/blog/${loaderData?.slug}`,
+			}: {},
 		],
 	}),
 
@@ -47,7 +55,7 @@ function BlogSlugComponent() {
 						/>
 
 						<div className="p-4 w-full relative z-2 bg-brand-dkblue/80">
-							<div className='max-w-lg mx-auto'>
+							<div className="max-w-lg mx-auto">
 								<span className="text-2xl">{post?.title}</span>
 							</div>
 						</div>
