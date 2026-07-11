@@ -46,8 +46,10 @@ function BlogSlugComponent() {
 							preview={post?.mainImage?.lqip}
 						/>
 
-						<div className="relative z-2">
-							<h1 className="p-4 bg-brand-dkblue/80 text-2xl">{post?.title}</h1>
+						<div className="p-4 w-full relative z-2 bg-brand-dkblue/80">
+							<div className='max-w-lg mx-auto'>
+								<span className="text-2xl">{post?.title}</span>
+							</div>
 						</div>
 					</section>
 
@@ -71,7 +73,7 @@ function BlogSlugComponent() {
 
 									{post?.authors?.map(({ id, name, image }) => (
 										<h2 key={id} className="flex-0 justify-center items-center">
-											<div className="flex-col gap-4">
+											<div className="my-4 flex-col gap-4">
 												<Image
 													className="rounded-full"
 													id={image?.id}
