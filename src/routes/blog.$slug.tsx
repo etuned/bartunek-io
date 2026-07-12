@@ -5,34 +5,42 @@ import { FormatDatetime } from '#/components/date-formater';
 import { Image } from '#/components/image';
 import { Badge } from '#/components/ui/badge';
 import { Skeleton } from '#/components/ui/skeleton';
+import { components } from '#/sanity/utils/serializers';
 import { fetchPost } from '../../utils/blog-post';
 
 export const Route = createFileRoute('/blog/$slug')({
 	notFoundComponent: () => (
-	<NotFound title="Oops, No Post Found">
-		<p>Looks like I didn't write a post at that url. We could go back one page or just start over.</p>
-	</NotFound>
-		),
+		<NotFound title="Oops, No Post Found">
+			<p>
+				Looks like I didn't write a post at that url. We could go back one page
+				or just start over.
+			</p>
+		</NotFound>
+	),
 	loader: async ({ params: { slug } }) => {
 		const post = await fetchPost({ data: slug });
 		return post;
 	},
 	head: ({ loaderData }) => ({
 		meta: [
-			{ title: `${loaderData?.title ?? 'No Blog Post Found'}  | Edwin Bartunek` },
-			loaderData?.short ?
 			{
-				name: 'description',
-				content: `${loaderData?.short}`,
-			}: {},
+				title: `${loaderData?.title ?? 'No Blog Post Found'}  | Edwin Bartunek`,
+			},
+			loaderData?.short
+				? {
+						name: 'description',
+						content: `${loaderData?.short}`,
+					}
+				: {},
 		],
-		
+
 		links: [
-			loaderData?.slug ?
-			{
-				rel: 'canonical',
-				href: `https://www.bartunek.io/blog/${loaderData?.slug}`,
-			}: {},
+			loaderData?.slug
+				? {
+						rel: 'canonical',
+						href: `https://www.bartunek.io/blog/${loaderData?.slug}`,
+					}
+				: {},
 		],
 	}),
 
@@ -115,6 +123,7 @@ function BlogSlugComponent() {
 							<PortableText
 								value={post?.mainContent}
 								onMissingComponent={false}
+								components={components}
 							/>
 							<p className="mt-4 text-center">
 								<Link to="/blog">Back to the blog list</Link>
