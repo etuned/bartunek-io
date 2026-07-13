@@ -23,7 +23,7 @@
     "@date-fns/tz": "^1.5.0",
     "@portabletext/react": "^6.2.0",
     "@sanity/asset-utils": "^2.3.0",
-    "@sanity/client": "^7.23.0",
+    "@sanity/client": "^7.23.1",
     "@sanity/image-url": "^2.1.1",
     "@sanity/react-loader": "^2.0.14",
     "@tabler/icons-react": "^3.44.0",
