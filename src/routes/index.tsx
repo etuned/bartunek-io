@@ -36,8 +36,8 @@ function Home() {
 	return (
 		<>
 			<section className="w-full max-w-lg mx-auto">
-				<div className="w-full m-2 p-4 flex flex-col items-center gap-1 md:flex-row md:justify-center">
-					<div className="w-full max-w-122.5 mb-4 p-2 flex flex-col gap-4 md:max-w-175 md:p-6">
+				<div className="w-full p-4 flex flex-col items-center gap-1 md:flex-row md:justify-center">
+					<div className="w-full max-w-120 mb-4 p-2 flex flex-col gap-4 md:max-w-165 md:p-6">
 						<p>
 							<span className="block">Hi, my name is</span>
 							<span className=" block text-[4rem] text-brand-aqua">
@@ -45,7 +45,7 @@ function Home() {
 							</span>
 						</p>
 						<h2 className="text-[2.5rem] font-normal">I help build the web.</h2>
-						<p className="w-full md:max-w-119.5">
+						<p className="w-full md:max-w-110">
 							I am a senior software engineer, focused on creating accessible,
 							user friendly software platforms on the web. I am also obssesed
 							with pizza and coffee!
