@@ -40,6 +40,7 @@
     "groq": "^6.4.0",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
+    "react-player": "^3.4.0",
     "sanity-image": "^1.1.0",
     "tailwind-merge": "^3.6.0",
     "tailwindcss": "^4.3.2"

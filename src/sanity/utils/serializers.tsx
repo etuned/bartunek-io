@@ -1,6 +1,9 @@
 import type { PortableTextComponents } from '@portabletext/react';
 import { Link } from '@tanstack/react-router';
 import { AnchorExternalLink } from '#/components/ui/anchor-link';
+import ReactPlayer from 'react-player'
+
+const isDev = import.meta.env.DEV
 
 export const components = {
 	marks: {
@@ -16,6 +19,21 @@ export const components = {
 				<Link to={value?.href}>{children}</Link>
 			),
 	}!,
-    hardBreak: () => <><br /><br /></>
+    hardBreak: () => <><br /><br /></>,
+	types: {
+		youTube: ({value}) => {
+			const {url} = value
+			return <ReactPlayer
+                    src={url}
+                    style={{ width: '100%', height: 'auto', aspectRatio: '16/9' }}
+                    config={{
+                        youtube: {
+                            origin: isDev ? "http://localhost:3000" : "https://www.bartunek.io",
+                            referrerpolicy: "strict-origin-when-cross-origin"
+                        }
+                    }}
 
+                />
+		}
+	}
 } satisfies PortableTextComponents;
