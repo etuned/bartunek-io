@@ -36,8 +36,8 @@ function Home() {
 	return (
 		<>
 			<section className="w-full max-w-lg mx-auto">
-				<div className="w-full p-4 flex flex-col items-center gap-1 md:flex-row md:justify-center">
-					<div className="w-full max-w-120 mb-4 p-2 flex flex-col gap-4 md:max-w-165 md:p-6">
+				<div className="w-full py-4 flex flex-col items-center gap-1 md:flex-row md:justify-between">
+					<div className="w-full max-w-120 mb-4 p-6 flex flex-col gap-4 md:max-w-165">
 						<p>
 							<span className="block">Hi, my name is</span>
 							<span className=" block text-[4rem] text-brand-aqua">
@@ -58,7 +58,7 @@ function Home() {
 						</p>
 					</div>
 					<Image
-						className="rounded-xl h-[350px] w-[350px]"
+						className="rounded-xl h-87.5 w-87.5 mx-6"
 						id={info?.author?.image?.id ?? ''}
 						alt={info?.author?.image?.alt}
 						preview={info?.author?.image?.lqip}
@@ -70,7 +70,7 @@ function Home() {
 
 			<section className="w-full mx-auto bg-brand-dkblue">
 				<hr className="gradient" />
-				<div className="p-4 max-w-lg mx-auto">
+				<div className="p-6 max-w-lg mx-auto">
 					<h3 className="text-3xl font-black">My Recent Blog Posts</h3>
 					<div className="max-w-max my-20 mx-auto">
 						<PostCards posts={info?.posts} />
@@ -79,7 +79,7 @@ function Home() {
 			</section>
 			<hr className="gradient" />
 			<section className="w-full mx-auto bg-brand-plum">
-				<div className="p-4 max-w-lg mx-auto">
+				<div className="p-6 max-w-lg mx-auto">
 					<h3 className="text-3xl font-black">My Recent Projects</h3>
 					<ProjectCards projects={info?.projects} />
 				</div>
