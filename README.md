@@ -1,4 +1,4 @@
-# TanStack Router - esbuild File-Based Quickstart
+# Bartunek.io - a small personal website
 
 A website to blog, share projects I've worked on and introduce myself. It is built with Tanstack Start, Sanity.io, and vite for the bundler.
 
