@@ -4,6 +4,7 @@ export const projectId =  import.meta.env.VITE_SANITY_PROJECT_ID
 export const dataset = import.meta.env.VITE_SANITY_DATASET
 export const apiVersion = import.meta.env.VITE_SANITY_API_VERSION 
 export const useCdn = import.meta.env.VITE_SANITY_USE_CDN 
+export const apiReadToken = import.meta.env.SANITY_API_READ_TOKEN
 
 export const client = createClient({
   projectId,
@@ -11,14 +12,3 @@ export const client = createClient({
   apiVersion,
   useCdn,
 })
-
-import {createQueryStore} from '@sanity/react-loader'
-
-export const {
-  // Used only server side
-  loadQuery,
-  setServerClient,
-  // Used only client side
-  useQuery,
-  useLiveMode,
-} = createQueryStore({client: false, ssr: true})
