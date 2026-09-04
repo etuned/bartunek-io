@@ -1,5 +1,5 @@
-import { notFound } from "@tanstack/react-router";
-import { client } from "../src/sanity/client"
+import { notFound } from "@tanstack/react-router"
+import { loadQuery } from "#/sanity/loader.server"
 import { createServerFn } from "@tanstack/react-start"
 import groq from 'groq';
 
@@ -63,11 +63,11 @@ export const fetchPost = createServerFn({ method: 'GET' })
     console.info(`Fetching post with id ${data}...`)
     try {
      console.log("Fetched:", "fetchPost on server")
-     const post = await client.fetch<PostType>(postQuery,{slug:data})
-     if (post === null ) {
+     const { data: dataRes } = await loadQuery<PostType>(postQuery,{slug:data})
+     if (dataRes === null ) {
         notFound({throw: true}); 
      }
-     return post
+     return dataRes
     } catch (error) {
       notFound({throw: true})
     }

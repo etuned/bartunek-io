@@ -1,4 +1,4 @@
-import { client } from "../src/sanity/client"
+import { loadQuery } from "#/sanity/loader.server"
 import { notFound } from "@tanstack/react-router"
 import { createServerFn } from "@tanstack/react-start"
 import groq from 'groq';
@@ -17,9 +17,9 @@ export const fetchAboutBio = createServerFn({ method: 'GET' })
   .handler(async () => {
     console.info(`Fetching About Bio list...`)
     try {
-      const about = await client.fetch<AboutBiotType>(aboutBioQuery, { authorName: "Edwin Bartunek", slice: 0 }).then((res) => res)
+      const { data } = await loadQuery<AboutBiotType>(aboutBioQuery, { authorName: "Edwin Bartunek", slice: 0 })
       console.log("fetched:", "fetchAboutBio on server")
-      return about
+      return data
     } catch (err) {
       console.log("ERROR:", err)
       notFound({ throw: true })
