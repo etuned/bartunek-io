@@ -2,6 +2,7 @@ import type { PortableTextComponents } from '@portabletext/react';
 import { Link } from '@tanstack/react-router';
 import { AnchorExternalLink } from '#/components/ui/anchor-link';
 import ReactPlayer from 'react-player'
+import { Image } from '#/components/image';
 
 const isDev = import.meta.env.DEV
 
@@ -34,6 +35,11 @@ export const components = {
                     }}
 
                 />
+		},
+		image: ({value}) => {
+			const {asset, alt} = value
+			return <Image id={asset._ref} alt={alt}/>
 		}
+
 	}
 } satisfies PortableTextComponents;
