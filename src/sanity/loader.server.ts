@@ -1,7 +1,7 @@
-import { loadQuery, setServerClient } from './loader'
-import { apiReadToken, client } from './client'
+import { apiReadToken, client } from './client';
+import { loadQuery, setServerClient } from './loader';
 
-const serverClient = client.withConfig({ token: apiReadToken })
-setServerClient(serverClient)
+const serverClient = client.withConfig({ token: apiReadToken });
+setServerClient(serverClient);
 
-export { loadQuery }
+export { loadQuery };
