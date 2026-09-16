@@ -38,8 +38,11 @@ export const components = {
 		},
 		image: ({value}) => {
 			const {asset, alt} = value
-			return <Image id={asset._ref} alt={alt}/>
-		}
-
+			return (
+				<div className='m-4 flex justify-center items-center'>
+					<Image loading='lazy' width={500} id={asset._ref} alt={alt}/>
+				</div>
+		    )
+	     }
 	}
 } satisfies PortableTextComponents;
