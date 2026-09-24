@@ -1,10 +1,12 @@
 import { PortableText } from '@portabletext/react';
 import { ClientOnly, createFileRoute, Link } from '@tanstack/react-router';
+import { buildSrc, buildSrcSet } from 'sanity-image';
 import { NotFound } from '#/components/ not-found';
 import { FormatDatetime } from '#/components/date-formater';
 import { Image } from '#/components/image';
 import { Badge } from '#/components/ui/badge';
 import { Skeleton } from '#/components/ui/skeleton';
+import { dataset, projectId } from '#/sanity/client';
 import { components } from '#/sanity/utils/serializers';
 import { fetchPost } from '../../utils/blog-post';
 
@@ -21,28 +23,52 @@ export const Route = createFileRoute('/blog/$slug')({
 		const post = await fetchPost({ data: slug });
 		return post;
 	},
-	head: ({ loaderData }) => ({
-		meta: [
-			{
-				title: `${loaderData?.title ?? 'No Blog Post Found'}  | Edwin Bartunek`,
-			},
-			loaderData?.short
-				? {
-						name: 'description',
-						content: `${loaderData?.short}`,
-					}
-				: {},
-		],
+	head: ({ loaderData }) => {
+		const imageId = loaderData?.mainImage?.id;
+		const baseUrl = `https://cdn.sanity.io/images/${projectId}/${dataset}/`;
+		const preloadLinks = imageId
+			? [
+					{
+						rel: 'preload',
+						as: 'image',
+						href: buildSrc({
+							baseUrl,
+							id: imageId,
+						}).src,
+						imageSrcSet: buildSrcSet({
+							baseUrl,
+							id: imageId,
+						}).join(', '),
+						imageSizes: '100vw',
+						fetchPriority: 'high' as const,
+					},
+				]
+			: [];
 
-		links: [
-			loaderData?.slug
-				? {
-						rel: 'canonical',
-						href: `https://www.bartunek.io/blog/${loaderData?.slug}`,
-					}
-				: {},
-		],
-	}),
+		return {
+			meta: [
+				{
+					title: `${loaderData?.title ?? 'No Blog Post Found'}  | Edwin Bartunek`,
+				},
+				loaderData?.short
+					? {
+							name: 'description',
+							content: `${loaderData?.short}`,
+						}
+					: {},
+			],
+
+			links: [
+				loaderData?.slug
+					? {
+							rel: 'canonical',
+							href: `https://www.bartunek.io/blog/${loaderData?.slug}`,
+						}
+					: {},
+				...preloadLinks,
+			],
+		};
+	},
 
 	component: BlogSlugComponent,
 });
@@ -59,7 +85,17 @@ function BlogSlugComponent() {
 							className="absolute top-0 left-0 w-full h-full object-cover select-none z-1"
 							id={post?.mainImage?.id}
 							alt={post?.mainImage?.alt}
-							preview={post?.mainImage?.lqip}
+							loading="eager"
+							fetchPriority="high"
+							sizes="100vw"
+							style={
+								post?.mainImage?.lqip
+									? {
+											backgroundImage: `url(${post.mainImage.lqip})`,
+											backgroundSize: 'cover',
+										}
+									: undefined
+							}
 						/>
 
 						<div className="p-4 w-full relative z-2 bg-brand-dkblue/80">
