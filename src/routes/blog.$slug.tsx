@@ -25,6 +25,8 @@ export const Route = createFileRoute('/blog/$slug')({
 	},
 	head: ({ loaderData }) => {
 		const imageId = loaderData?.mainImage?.id;
+		const crop = loaderData?.mainImage?.crop;
+		const hotspot = loaderData?.mainImage?.hotspot;
 		const baseUrl = `https://cdn.sanity.io/images/${projectId}/${dataset}/`;
 		const preloadLinks = imageId
 			? [
@@ -34,10 +36,14 @@ export const Route = createFileRoute('/blog/$slug')({
 						href: buildSrc({
 							baseUrl,
 							id: imageId,
+							crop,
+							hotspot,
 						}).src,
 						imageSrcSet: buildSrcSet({
 							baseUrl,
 							id: imageId,
+							crop,
+							hotspot,
 						}).join(', '),
 						imageSizes: '100vw',
 						fetchPriority: 'high' as const,
@@ -85,6 +91,8 @@ function BlogSlugComponent() {
 							className="absolute top-0 left-0 w-full h-full object-cover select-none z-1"
 							id={post?.mainImage?.id}
 							alt={post?.mainImage?.alt}
+							crop={post?.mainImage?.crop}
+							hotspot={post?.mainImage?.hotspot}
 							loading="eager"
 							fetchPriority="high"
 							sizes="100vw"
@@ -131,6 +139,8 @@ function BlogSlugComponent() {
 													id={image?.id}
 													alt={post?.authors.at(0)?.image?.alt}
 													preview={image?.lqip}
+													crop={image?.crop}
+													hotspot={image?.hotspot}
 													mode="cover"
 													height={45}
 													width={45}

@@ -1,31 +1,36 @@
-import { notFound } from "@tanstack/react-router"
-import { loadQuery } from "#/sanity/loader.server"
-import { createServerFn } from "@tanstack/react-start"
+import { notFound } from '@tanstack/react-router';
+import { createServerFn } from '@tanstack/react-start';
 import groq from 'groq';
+import type { CropData, HotspotData } from 'sanity-image';
+import { loadQuery } from '#/sanity/loader.server';
 
 export type PostType = {
-  id: string;
-  title: string;
-  slug: string;
-  date: string;
-  mainImage: {
-      id: string;
-      alt: string;
-      lqip: string;
-      };
-  categories: {id: string,name:string}[];
-  authors: {
-    id: string;
-    name: string;
-    image: {
-      id: string;
-      alt: string;
-      lqip: string;
-      }
-    }[];
-    short: string;
-    mainContent: any;
-  }
+	id: string;
+	title: string;
+	slug: string;
+	date: string;
+	mainImage: {
+		id: string;
+		alt: string;
+		lqip: string;
+		crop?: CropData | null;
+		hotspot?: HotspotData | null;
+	};
+	categories: { id: string; name: string }[];
+	authors: {
+		id: string;
+		name: string;
+		image: {
+			id: string;
+			alt: string;
+			lqip: string;
+			crop?: CropData | null;
+			hotspot?: HotspotData | null;
+		};
+	}[];
+	short: string;
+	mainContent: any;
+};
 
 const postQuery = groq`*[_type == "post" && slug.current == $slug ][0]
     {
@@ -44,6 +49,8 @@ const postQuery = groq`*[_type == "post" && slug.current == $slug ][0]
             "id": image.asset._ref,
             alt,
             "lqip": image.asset->metadata.lqip,
+            "crop": image.crop,
+            "hotspot": image.hotspot,
               },
             },
           },
@@ -51,11 +58,13 @@ const postQuery = groq`*[_type == "post" && slug.current == $slug ][0]
             "id": image.asset._ref,
             alt,
             "lqip": image.asset->metadata.lqip,
+            "crop": image.crop,
+            "hotspot": image.hotspot,
         },
         short,
         mainContent
     }
-    `
+    `;
 
 export const fetchPost = createServerFn({ method: 'GET' })
   .validator((d: string) => d)
