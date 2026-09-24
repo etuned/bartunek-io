@@ -1,31 +1,61 @@
 // src/routes/index.tsx
 import { createFileRoute } from '@tanstack/react-router';
+import { buildSrc, buildSrcSet } from 'sanity-image';
 import { Image } from '#/components/image';
 import { PostCards } from '#/components/post-cards';
 import { ProjectCards } from '#/components/project-cards';
 import { AnchorExternalLink } from '#/components/ui/anchor-link';
-
 import { fetchHomeInfo } from '../../utils/home-info';
+import { dataset, projectId } from '../sanity/client';
 
 export const Route = createFileRoute('/')({
-	head: () => ({
-		meta: [
-			{
-				title: 'Edwin Bartunek - A Senior Software Engineer',
-			},
-			{
-				name: 'description',
-				content:
-					'A software engineer building for the web and writing about it.',
-			},
-		],
-		links: [
-			{
-				rel: 'canonical',
-				href: 'https://www.bartunek.io',
-			},
-		],
-	}),
+	head: ({ loaderData }) => {
+		const imageId = loaderData?.author?.image?.id;
+		const baseUrl = `https://cdn.sanity.io/images/${projectId}/${dataset}/`;
+		const preloadLinks = imageId
+			? [
+					{
+						rel: 'preload',
+						as: 'image',
+						href: buildSrc({
+							baseUrl,
+							id: imageId,
+							width: 350,
+							height: 350,
+							mode: 'contain',
+						}).src,
+						imageSrcSet: buildSrcSet({
+							baseUrl,
+							id: imageId,
+							width: 350,
+							height: 350,
+							mode: 'contain',
+						}).join(', '),
+						fetchPriority: 'high' as const,
+					},
+				]
+			: [];
+
+		return {
+			meta: [
+				{
+					title: 'Edwin Bartunek - A Senior Software Engineer',
+				},
+				{
+					name: 'description',
+					content:
+						'A software engineer building for the web and writing about it.',
+				},
+			],
+			links: [
+				{
+					rel: 'canonical',
+					href: 'https://www.bartunek.io',
+				},
+				...preloadLinks,
+			],
+		};
+	},
 	loader: async () => await fetchHomeInfo(),
 	component: Home,
 });
@@ -61,9 +91,18 @@ function Home() {
 						className="rounded-xl h-87.5 w-87.5 mx-6"
 						id={info?.author?.image?.id ?? ''}
 						alt={info?.author?.image?.alt}
-						preview={info?.author?.image?.lqip}
 						height={350}
 						width={350}
+						loading="eager"
+						fetchPriority="high"
+						style={
+							info?.author?.image?.lqip
+								? {
+										backgroundImage: `url(${info.author.image.lqip})`,
+										backgroundSize: 'cover',
+									}
+								: undefined
+						}
 					/>
 				</div>
 			</section>

@@ -33,6 +33,10 @@ export const Route = createRootRoute({
 		],
 		links: [
 			{
+				rel: 'preconnect',
+				href: 'https://cdn.sanity.io',
+			},
+			{
 				rel: 'apple-touch-icon',
 				sizes: '180x180',
 				type: 'image/svg',
