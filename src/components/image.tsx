@@ -4,4 +4,4 @@ import { dataset, projectId } from '../sanity/client';
 
 export const Image = <T extends React.ElementType = 'img'>(
 	props: WrapperProps<T>,
-) => <SanityImage projectId={projectId} dataset={dataset} {...props} />;
+) => <SanityImage projectId={projectId} dataset={dataset} queryParams={{auto: "format"}} {...props} />;
