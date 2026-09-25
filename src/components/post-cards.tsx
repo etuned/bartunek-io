@@ -29,10 +29,17 @@ export function PostCards({ posts }: { posts?: PostsListType | null }) {
 						loading="lazy"
 						id={image?.id}
 						alt={image?.alt}
-						preview={image?.lqip}
-						mode="cover"
 						height={216}
 						width={384}
+						mode='cover'
+						style={
+							image?.lqip ? 
+								{
+									backgroundImage: `url(${image?.lqip})`,
+									backgroundSize: 'cover',
+								}
+								: undefined
+						}
 						className="relative z-20 aspect-video w-full object-cover"
 						sizes="(min-width: 1240px) 390px, calc((100vw - 40px - 30px) / 3)"
 					/>
