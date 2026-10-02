@@ -3,6 +3,7 @@ import { Link } from '@tanstack/react-router';
 import { AnchorExternalLink } from '#/components/ui/anchor-link';
 import ReactPlayer from 'react-player'
 import { Image } from '#/components/image';
+import { CodeBlock } from '#/components/ui/serializers/codeBlock';
 
 const isDev = import.meta.env.DEV
 
@@ -43,6 +44,7 @@ export const components = {
 					<Image loading='lazy' width={500} id={asset._ref} alt={alt}/>
 				</div>
 		    )
-	     }
+	     },
+		 code: CodeBlock
 	}
 } satisfies PortableTextComponents;
