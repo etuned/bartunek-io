@@ -1,5 +1,6 @@
 import { PortableText } from '@portabletext/react';
 import { createFileRoute } from '@tanstack/react-router';
+import { components } from '#/sanity/utils/serializers';
 import { fetchAboutBio } from '../../utils/about-bio';
 
 export const Route = createFileRoute('/about/')({
@@ -31,9 +32,13 @@ function RouteComponent() {
 			<hr className="gradient" />
 			<section className="w-full my-20 m-2 p-4 max-w-lg mx-auto">
 				<div className="w-full flex flex-col items-center justify-center">
-					<div className='m-2 p-4'>
-						<PortableText value={about?.bio} onMissingComponent={false} />
-				    </div>
+					<div className="m-2 p-4">
+						<PortableText
+							value={about?.bio}
+							components={components}
+							onMissingComponent={false}
+						/>
+					</div>
 				</div>
 			</section>
 			<hr className="gradient" />
