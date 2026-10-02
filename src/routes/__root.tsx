@@ -50,7 +50,7 @@ export const Route = createRootRoute({
 			},
 			{
 				rel: 'icon',
-				type: 'image/png',
+				type: 'image/svg',
 				sizes: '16x16',
 				href: '/favicon.svg',
 			},
