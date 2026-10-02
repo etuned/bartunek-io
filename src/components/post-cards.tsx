@@ -17,10 +17,10 @@ import { Skeleton } from './ui/skeleton';
 
 export function PostCards({ posts }: { posts?: PostsListType | null }) {
 	return (
-		<div className="py-6 grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-flow-col lg:place-items-center justify-center">
+		<div className="py-6 grid gap-6 grid-flow-col">
 			{posts?.map(({ id, slug, date, category, title, short, image }) => (
 				<Card
-					size="default"
+					size="sm"
 					key={id}
 					className="relative mx-auto w-full max-w-lg pt-0"
 				>
