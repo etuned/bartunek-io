@@ -29,11 +29,11 @@ function RouteComponent() {
 	return (
 		<div className="bg-brand-dkblue">
 			<hr className="gradient" />
-			<section className="w-full max-w-lg mx-auto">
-				<div className="w-full m-2 p-4 flex flex-col items-center gap-1 md:flex-row md:justify-center">
-					<div className="p-4 my-20">
+			<section className="w-full my-20 m-2 p-4 max-w-lg mx-auto">
+				<div className="w-full flex flex-col items-center justify-center">
+					<div className='m-2 p-4'>
 						<PortableText value={about?.bio} onMissingComponent={false} />
-					</div>
+				    </div>
 				</div>
 			</section>
 			<hr className="gradient" />
