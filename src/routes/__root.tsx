@@ -7,7 +7,7 @@ import {
 	Scripts,
 } from '@tanstack/react-router';
 import type { ReactNode } from 'react';
-import '../styles/root.css';
+import '../styles/root.css?url';
 import {
 	IconBrandBluesky,
 	IconBrandGithub,
