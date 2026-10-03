@@ -1,5 +1,5 @@
 import SyntaxHighlighter from 'react-syntax-highlighter';
-import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism'
+import { docco } from "react-syntax-highlighter/dist/esm/styles/hljs";
 
 interface CodeValue {
   _type: 'code'
@@ -15,18 +15,16 @@ export function CodeBlock({ value }: { value: CodeValue }) {
 
   return (
     <div className="my-4 rounded-lg overflow-hidden border border-gray-800">
-      {value.filename && (
-        <div className="bg-gray-800 text-gray-300 text-xs px-4 py-2 font-mono">
-          {value.filename}
+      {value.language && (
+        <div className="flex space-between bg-gray-800 text-gray-300 text-xs px-4 py-2 font-mono">
+          <span>{value.language}</span>
+          <span>"hello"</span>
         </div>
       )}
       <SyntaxHighlighter
-        language={value.language || 'text'}
-        style={oneDark}
+        language={value?.language || 'text'}
+        style={docco}
         customStyle={{
-          margin: 0,
-          padding: '1rem',
-          fontSize: '0.9rem',
           borderRadius: 0,
         }}
         showLineNumbers
