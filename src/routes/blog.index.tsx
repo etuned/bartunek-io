@@ -31,7 +31,7 @@ function RouteComponent() {
 		<div className="w-full bg-brand-dkblue mx-auto">
 			<hr className="gradient" />
 			<section className="p-4 max-w-lg mx-auto">
-				<h1>My Blog Posts</h1>
+				<h3 className="p-4 text-3xl font-black">My Blog Posts</h3>
 				<PostCards posts={posts} />
 			</section>
 			<hr className="gradient" />
