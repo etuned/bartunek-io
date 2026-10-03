@@ -6,6 +6,7 @@ import { AnchorExternalLink } from "./ui/anchor-link";
 
 export function ProjectCards({projects}: { projects?: ProjectsType | null }) {
 	return (
+		
 		<div className="w-full my-20 p-6 flex flex-col justify-center items-center">
 						{projects?.map(
 							({
@@ -101,9 +102,20 @@ export function ProjectCards({projects}: { projects?: ProjectsType | null }) {
 											loading="lazy"
 											id={image?.id}
 											alt={image?.alt}
-											preview={image?.lqip}
+											width={384}
+											height={216}
 											mode="cover"
-											className="rounded-lg aspect-video w-full object-cover"
+											style={
+												image?.lqip
+													? {
+															width: '100%',
+															height: '100%',
+															backgroundImage: `url(${image?.lqip})`,
+															backgroundSize: 'cover',
+														}
+													: undefined
+											}
+											className="w-full h-full rounded-lg aspect-video object-cover"
 											sizes="(max-width: 400px) 600px, calc((100vw - 40px - 30px) / 3)"
 										/>
 									</div>
