@@ -4,23 +4,22 @@ import { fetchAllProjects } from '../../utils/full-projects';
 
 export const Route = createFileRoute('/projects')({
 	head: () => ({
-    meta: [
-      {
-        title: 'Projects | Edwin Bartunek',
-		
-      },
-	  {
-		name: 'description',
-		content: `Edwin's latest projects and information about technologies he uses.`
-	  }
-    ],
-    links: [
-      {
-        rel: "canonical",
-        href: "https://www.bartunek.io/projects",
-      },
-    ],
-  }),
+		meta: [
+			{
+				title: 'Projects | Edwin Bartunek',
+			},
+			{
+				name: 'description',
+				content: `Edwin's latest projects and information about technologies he uses.`,
+			},
+		],
+		links: [
+			{
+				rel: 'canonical',
+				href: 'https://www.bartunek.io/projects',
+			},
+		],
+	}),
 	loader: () => fetchAllProjects(),
 	component: RouteComponent,
 });
