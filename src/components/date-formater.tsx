@@ -1,17 +1,18 @@
 import { tz, tzName } from '@date-fns/tz';
 import { format } from 'date-fns';
 
-function FormatDatetime({
-	dateObject,
-	elementProps,
-}: {
+interface FormatDatetimeProps extends React.ComponentProps<'span'> {
 	dateObject: {
 		datetimeString: string;
 		formatter?: string;
 		timezone?: string | 'none';
 	};
-	elementProps?: React.ComponentProps<'span'>;
-}) {
+}
+
+function FormatDatetime({
+	dateObject,
+	...props
+}: FormatDatetimeProps) {
 
 	const date = new Date(dateObject?.datetimeString);
 	const formatter = dateObject?.formatter
@@ -22,10 +23,10 @@ function FormatDatetime({
 			? dateObject?.timezone
 			: Intl.DateTimeFormat()?.resolvedOptions()?.timeZone;
 	return (
-		<span {...elementProps}>
+		<span {...props}>
 			{format(date, formatter, { in: tz(timezone) })}
 			{dateObject?.timezone !== 'none' && ' '}
-			{dateObject?.timezone !== 'none' && tzName(timezone, date, 'shortGeneric')}
+			{dateObject?.timezone !== 'none' && tzName(timezone, date, 'short')}
 		</span>
 	);
 }
