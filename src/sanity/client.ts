@@ -1,14 +1,18 @@
-import { createClient } from '@sanity/client'
+import { createClient } from '@sanity/client';
 
-export const projectId =  import.meta.env.VITE_SANITY_PROJECT_ID
-export const dataset = import.meta.env.VITE_SANITY_DATASET
-export const apiVersion = import.meta.env.VITE_SANITY_API_VERSION 
-export const useCdn = import.meta.env.VITE_SANITY_USE_CDN 
-export const apiReadToken = import.meta.env.SANITY_API_READ_TOKEN
+export const projectId = import.meta.env.VITE_SANITY_PROJECT_ID;
+export const dataset = import.meta.env.VITE_SANITY_DATASET;
+export const apiVersion = import.meta.env.VITE_SANITY_API_VERSION;
+export const useCdn = import.meta.env.VITE_SANITY_USE_CDN;
+export const apiReadToken =
+	import.meta.env.SANITY_API_READ_TOKEN ??
+	(typeof process !== 'undefined'
+		? process.env?.SANITY_API_READ_TOKEN
+		: undefined);
 
 export const client = createClient({
-  projectId,
-  dataset,
-  apiVersion,
-  useCdn,
-})
+	projectId,
+	dataset,
+	apiVersion,
+	useCdn,
+});
