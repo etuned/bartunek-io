@@ -17,10 +17,10 @@ import { Skeleton } from './ui/skeleton';
 
 export function PostCards({ posts }: { posts?: PostsListType | null }) {
 	return (
-		<div className="py-6 grid gap-6 grid-flow-col">
+		<div className="py-6 grid gap-6 grid-flow-row grid-cols-1 sm:grid-cols-2 mg:grid-cols-3 lg:grid-cols-4">
 			{posts?.map(({ id, slug, date, category, title, short, image }) => (
 				<Card
-					size="sm"
+					size="default"
 					key={id}
 					className="relative mx-auto w-full max-w-lg pt-0"
 				>
@@ -47,7 +47,7 @@ export function PostCards({ posts }: { posts?: PostsListType | null }) {
 						<CardAction>
 							<Badge>{category.name}</Badge>
 						</CardAction>
-						<CardTitle>{title}</CardTitle>
+						<CardTitle className='font-bold'>{title}</CardTitle>
 						<CardDescription>
 							<ClientOnly
 								fallback={
@@ -55,6 +55,7 @@ export function PostCards({ posts }: { posts?: PostsListType | null }) {
 									}
 							>
 								<FormatDatetime
+									className="text-xs"
 									dateObject={{ datetimeString: date }}
 								/>
 							</ClientOnly>
