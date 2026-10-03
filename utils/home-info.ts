@@ -93,7 +93,7 @@ const homeInfoQuery = groq`*[_type == "author" && name == $authorName] [0]{
             "lqip": image.asset->metadata.lqip,
               },
             },
-      "posts": *[_type == "post"][0...3]{
+      "posts": *[_type == "post"][0...4]{
             "id": _id,
             title,
             date,
