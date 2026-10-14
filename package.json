@@ -1,5 +1,6 @@
 {
   "name": "bartunek-io",
+  "version": "1.0.0",
   "private": true,
   "type": "module",
   "imports": {
@@ -48,7 +49,6 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^2.5.15",
-    "@tailwindcss/typography": "^0.5.20",
     "@tanstack/devtools-vite": "^0.8.5",
     "@tanstack/router-cli": "^1.167.44",
     "@testing-library/dom": "^10.4.2",
@@ -66,8 +66,7 @@
     "wrangler": "^4.151.0"
   },
   "allowScripts": {
-    "workerd@1.20261012.1": true,
-    "esbuild@0.28.2": true
-  },
-  "version": "1.0.0"
+    "workerd": true,
+    "esbuild": true
+  }
 }
