@@ -68,5 +68,6 @@
   "allowScripts": {
     "workerd@1.20261012.1": true,
     "esbuild@0.28.2": true
-  }
+  },
+  "version": "1.0.0"
 }
