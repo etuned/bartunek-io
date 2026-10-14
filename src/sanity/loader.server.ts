@@ -6,7 +6,7 @@ const usePreviewDrafts = Boolean(isDev && apiReadToken);
 
 const serverClient = client.withConfig({
 	token: apiReadToken,
-	perspective: usePreviewDrafts ? 'previewDrafts' : 'published',
+	perspective: usePreviewDrafts ? 'drafts' : 'published',
 	useCdn: !usePreviewDrafts,
 });
 setServerClient(serverClient);
