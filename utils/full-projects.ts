@@ -83,15 +83,19 @@ const ProjectsQuery = groq`*[_type == "project"]| order(dates.startDate desc){
           },
         }`
 
+export async function fetchProjectsData() {
+  console.info(`Fetching Projects...`)
+  try {
+    const { data } = await loadQuery<ProjectsType>(ProjectsQuery)
+    console.log("fetched:", "fetchProjectsData on server")
+    return data
+  } catch (err) {
+    console.log("ERROR:", err)
+    notFound({ throw: true })
+  }
+}
+
 export const fetchAllProjects = createServerFn({ method: 'GET' })
   .handler(async () => {
-    console.info(`Fetching Projects...`)
-    try {
-      const { data } = await loadQuery<ProjectsType>(ProjectsQuery)
-      console.log("fetched:", "fetchAllProjects on server")
-      return data
-    } catch (err) {
-      console.log("ERROR:", err)
-      notFound({ throw: true })
-    }
+    return fetchProjectsData()
   })
