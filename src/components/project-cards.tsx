@@ -108,14 +108,12 @@ export function ProjectCards({projects}: { projects?: ProjectsType | null }) {
 											style={
 												image?.lqip
 													? {
-															width: '100%',
-															height: '100%',
 															backgroundImage: `url(${image?.lqip})`,
 															backgroundSize: 'cover',
 														}
 													: undefined
 											}
-											className="w-full h-full rounded-lg aspect-video object-cover"
+											className="w-full h-full rounded-lg object-cover"
 											sizes="(max-width: 400px) 600px, calc((100vw - 40px - 30px) / 3)"
 										/>
 									</div>
